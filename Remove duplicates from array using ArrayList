@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+public class Main
+{
+    public static List<Integer> removeDuplicate(int[] arr){
+        
+       List<Integer> uniqueElement=new ArrayList<>();
+       
+       for(int i:arr){
+           if(!uniqueElement.contains(i)){
+               uniqueElement.add(i);
+           }
+       }
+       return uniqueElement;
+        
+    }
+	public static void main(String[] args) {
+       int[] arr={1,2,2,1};
+       List<Integer> result=removeDuplicate(arr);
+       for(int num :result){
+           System.out.print(num+" ");
+       }
+
+        
+        
+    }
+}
