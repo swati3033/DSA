@@ -1,0 +1,41 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Main {
+
+    // Function to arrange numbers to form the largest number
+    public static String largestNumber(String[] arr) {
+        // Sort array with custom comparator
+        Arrays.sort(arr, new Comparator<String>() {
+            @Override
+            public int compare(String X, String Y) {
+                // First concatenate both possible orders
+                String XY = X + Y;
+                String YX = Y + X;
+                // Compare which concatenation is greater
+                return YX.compareTo(XY); // Sort in descending order
+            }
+        });
+
+        // If the largest number is "0", the entire number is "0"
+        if (arr[0].equals("0")) {
+            return "0";
+        }
+
+        // Build the largest number by concatenating the sorted array
+        StringBuilder result = new StringBuilder();
+        for (String num : arr) {
+            result.append(num);
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String[] arr1 = {"3", "30", "34", "5", "9"};
+        String[] arr2 = {"54", "546", "548", "60"};
+
+        System.out.println("Largest number possible: " + largestNumber(arr1)); // Output: 9534330
+        System.out.println("Largest number possible: " + largestNumber(arr2)); // Output: 6054854654
+    }
+}
