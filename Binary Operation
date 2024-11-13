@@ -1,0 +1,57 @@
+public class Main {
+
+    // Function to perform binary operations
+    public static String performBinaryOperation(String bin1, String bin2, String operator) {
+        // Make both strings the same length by padding with leading zeros
+        int maxLength = Math.max(bin1.length(), bin2.length());
+        bin1 = String.format("%" + maxLength + "s", bin1).replace(' ', '0');
+        bin2 = String.format("%" + maxLength + "s", bin2).replace(' ', '0');
+
+        // Initialize result string builder
+        StringBuilder result = new StringBuilder();
+
+        // Perform the respective binary operation
+        for (int i = 0; i < maxLength; i++) {
+            char bit1 = bin1.charAt(i);
+            char bit2 = bin2.charAt(i);
+
+            char resultBit = '0'; // Default result
+
+            switch (operator.toUpperCase()) {
+                case "AND":
+                    // AND operation: both bits must be 1
+                    if (bit1 == '1' && bit2 == '1') {
+                        resultBit = '1';
+                    }
+                    break;
+                case "OR":
+                    // OR operation: at least one bit must be 1
+                    if (bit1 == '1' || bit2 == '1') {
+                        resultBit = '1';
+                    }
+                    break;
+                case "XOR":
+                    // XOR operation: bits must be different
+                    if (bit1 != bit2) {
+                        resultBit = '1';
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported operator: " + operator);
+            }
+
+            result.append(resultBit); // Append the result bit
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String bin1 = "101";
+        String bin2 = "101";
+        
+        System.out.println("AND: " + performBinaryOperation(bin1, bin2, "AND"));   // Output: "101"
+        System.out.println("OR: " + performBinaryOperation(bin1, bin2, "OR"));     // Output: "101"
+        System.out.println("XOR: " + performBinaryOperation(bin1, bin2, "XOR"));  // Output: "000"
+    }
+}
